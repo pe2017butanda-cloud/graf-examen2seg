@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turno de Noche: FNAF | Videojuego 2D</title>
+
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="cabecera py-3">
+    <div class="container-xl d-flex align-items-center justify-content-center gap-3 flex-wrap">
+      <img src="assets/header.png" alt="Imagen del videojuego" class="cabecera__img" onerror="this.style.display='none'">
+      <div class="text-center text-md-start">
+        <h1 class="cabecera__titulo mb-0">Turno de Noche: FNAF</h1>
+        <p class="cabecera__sub mb-0">Cámara 03 · Los animatrónicos despertaron: ¡desactiva a los 6 antes del amanecer!</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main class="container-xl py-3">
+    <div class="row g-3 align-items-start">
+
+      <!-- Videojuego -->
+      <section class="col-lg-9">
+        <div class="marco-juego">
+          <canvas id="lienzo" width="960" height="600" aria-label="Área de juego"></canvas>
+
+          <!-- Pantalla de inicio (necesaria para que el navegador permita reproducir audio) -->
+          <div id="pantallaInicio" class="pantalla-inicio">
+            <h2 class="pantalla-inicio__titulo">Comienza tu turno</h2>
+            <p class="pantalla-inicio__texto">Vigila las cámaras y haz clic sobre los animatrónicos para desactivarlos.</p>
+            <button id="btnIniciar" class="btn btn-alarma btn-lg">Iniciar turno</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel lateral: contador + instrucciones + audio -->
+      <aside class="col-lg-3">
+        <div class="panel mb-3 text-center">
+          <div class="panel__etiqueta">Animatrónicos desactivados</div>
+          <div id="contador" class="panel__contador" aria-live="polite">0</div>
+        </div>
+
+        <div class="panel mb-3">
+          <h2 class="panel__titulo">Manual del vigilante</h2>
+          <ul class="instrucciones mb-0">
+            <li>Siempre hay <strong>6 animatrónicos</strong> activos en el local.</li>
+            <li><strong>Haz clic</strong> en uno para desactivarlo: se reinicia en otra zona.</li>
+            <li>Al <strong>chocar</strong>, rebotan con un chispazo.</li>
+            <li>Cada desactivación suma <strong>1 punto</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <button id="btnSonido" class="btn btn-outline-alarma w-100 mb-2" type="button">Silenciar</button>
+          <label for="volumen" class="form-label small mb-1">Volumen de la música</label>
+          <input id="volumen" type="range" class="form-range" min="0" max="1" step="0.05" value="0.9">
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="pie py-3">
+    <div class="container-xl text-center">
+      <p class="mb-1 pie__titulo">Créditos del videojuego</p>
+      <p class="mb-0 small">
+        Pablo Ernesto Butanda López — No. de control 23200987
+        &nbsp;|&nbsp;
+        Mario Alberto Silva López — No. de control 23200900
+      </p>
+    </div>
+  </footer>
+
+  <!-- Música de fondo -->
+  <audio id="musica" src="assets/sonido.mp3" loop preload="auto"></audio>
+
+  <script src="juego.js"></script>
+</body>
+</html>

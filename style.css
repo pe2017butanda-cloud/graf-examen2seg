@@ -1,0 +1,140 @@
+/* ===== Paleta: oscuridad, alarma roja, cámara verde, ámbar, metal ===== */
+:root {
+  --noche: #050807;
+  --noche-2: #0d1411;
+  --alarma: #e8202a;
+  --camara: #39ff88;
+  --ambar: #ffb627;
+  --metal: #c9d1cc;
+}
+
+/* Puntero personalizado en toda la página (32x32 recomendado) */
+html, body {
+  cursor: url('assets/linterna.png') 16 16, auto;
+}
+a, button, input[type="range"], .btn {
+  cursor: url('assets/linterna.png') 16 16, pointer;
+}
+
+body {
+  background:
+    radial-gradient(1200px 500px at 50% -10%, #12301f 0%, transparent 60%),
+    var(--noche);
+  color: var(--metal);
+  font-family: 'Special Elite', 'Courier New', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+
+/* ===== Header ===== */
+.cabecera {
+  background: linear-gradient(180deg, #0f1a15 0%, var(--noche) 100%);
+  border-bottom: 2px solid var(--alarma);
+  box-shadow: 0 6px 30px rgba(232, 32, 42, .22);
+}
+.cabecera__img { height: 90px; width: auto; max-width: 220px; object-fit: contain; filter: drop-shadow(0 0 12px rgba(232,32,42,.6)); }
+.cabecera__titulo {
+  font-family: 'VT323', monospace;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--alarma);
+  text-shadow: 0 0 16px rgba(232,32,42,.7), 2px 2px 0 #2a0305;
+  animation: parpadeo 5s infinite;
+}
+.cabecera__sub { color: #9fb5a8; font-size: .95rem; }
+
+@keyframes parpadeo {
+  0%, 90%, 100% { opacity: 1; }
+  91% { opacity: .35; }
+  93% { opacity: 1; }
+  96% { opacity: .6; }
+}
+
+/* ===== Marco del juego (monitor de seguridad) ===== */
+.marco-juego {
+  position: relative;
+  border: 4px solid #2b3530;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 0 2px #000, 0 0 35px rgba(57, 255, 136, .25), inset 0 0 40px rgba(0,0,0,.9);
+}
+#lienzo {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  cursor: url('assets/linterna.png') 16 16, crosshair;
+}
+
+/* ===== Pantalla de inicio ===== */
+.pantalla-inicio {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .6rem; text-align: center; padding: 1rem;
+  background: radial-gradient(circle at center, rgba(5,8,7,.6), rgba(5,8,7,.94));
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+.pantalla-inicio.oculta { display: none; }
+.pantalla-inicio__titulo {
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  letter-spacing: 3px;
+  color: var(--camara);
+  text-shadow: 0 0 22px rgba(57,255,136,.7);
+  margin: 0;
+}
+.pantalla-inicio__texto { color: var(--metal); margin: 0 0 .6rem; }
+
+/* ===== Botones ===== */
+.btn-alarma {
+  background: var(--alarma); border: 0; color: #fff; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  box-shadow: 0 0 22px rgba(232,32,42,.6);
+  animation: latido 1.4s ease-in-out infinite;
+}
+.btn-alarma:hover { background: #ff3d47; color: #fff; }
+.btn-outline-alarma { border: 1px solid var(--alarma); color: var(--alarma); }
+.btn-outline-alarma:hover { background: var(--alarma); color: #fff; }
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ===== Panel lateral ===== */
+.panel {
+  background: linear-gradient(180deg, var(--noche-2), #080d0b);
+  border: 1px solid #25382f;
+  border-radius: 8px;
+  padding: .9rem 1rem;
+}
+.panel__etiqueta { font-size: .85rem; color: #9fb5a8; }
+.panel__contador {
+  font-family: 'VT323', monospace;
+  font-size: 4.2rem; line-height: 1;
+  color: var(--camara);
+  text-shadow: 0 0 16px rgba(57,255,136,.75);
+}
+.panel__contador.sube { animation: sube .35s ease-out; }
+@keyframes sube {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35) rotate(-3deg); color: #fff; }
+  100% { transform: scale(1); }
+}
+.panel__titulo { font-size: 1rem; color: var(--ambar); margin-bottom: .4rem; text-transform: uppercase; letter-spacing: 1px; }
+.instrucciones { padding-left: 1.1rem; font-size: .88rem; line-height: 1.35; }
+.instrucciones li + li { margin-top: .25rem; }
+
+/* ===== Footer ===== */
+.pie { background: #030504; border-top: 2px solid var(--alarma); color: #9fb5a8; }
+.pie__titulo { color: var(--ambar); font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cabecera__titulo, .btn-alarma { animation: none; }
+}
