@@ -3,7 +3,7 @@
 Videojuego 2D de navegador desarrollado con HTML5 Canvas, CSS y JavaScript.
 
 > Trabajo realizado en **binas**.
-
+> 
 ---
 
 ##  Integrantes
